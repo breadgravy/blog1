@@ -145,8 +145,9 @@ pre code {
 /* Layout */
 .content {
   margin: 0 auto 4em;
-  max-width: 400px;
-  padding: 0 1ch;
+  max-width: 120ch;
+  width: 100%;
+  padding: 0 clamp(1ch, 3vw, 3ch);
   word-wrap: break-word;
 }
 
