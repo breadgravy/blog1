@@ -7,18 +7,6 @@ This repository includes a single setup script to install optional theme depende
 - [Hugo](https://gohugo.io/installation/) (required)
 - [Node.js + npm](https://nodejs.org/) (optional, used for theme dependencies)
 
-## Environment bootstrap
-
-If your environment is missing dependencies (as seen in previous logs where `hugo` was not installed), run:
-
-```bash
-./setup_env.sh
-```
-
-This installs `hugo` and `nodejs`/`npm` using the available package manager (`apt-get`, `dnf`, `yum`, `pacman`, or `brew`).
-
-Use `DRY_RUN=1 ./setup_env.sh` to preview installation commands without executing them.
-
 ## One-command setup and deploy
 
 From the repository root:

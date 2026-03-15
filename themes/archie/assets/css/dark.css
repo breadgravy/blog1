@@ -1,6 +1,7 @@
+/* Base colors */
 body {
-  color: white;
   background-color: #202124;
+  color: white;
 }
 
 ::-moz-selection {
@@ -15,21 +16,11 @@ body {
   text-shadow: none;
 }
 
+/* Typography and blocks */
 hr {
   border-top: 3px dotted blue;
 }
-code {
-  background-color: lightblue;
-  color: black;
-  text-decoration: bold;
-  padding: 0.1em 0.2em;
-}
-pre {
-  background-color: #272822;
-  line-height: 1.4;
-  overflow-x: auto;
-  padding: 1em;
-}
+
 blockquote {
   border-color: blue;
 }
@@ -43,15 +34,31 @@ h6 {
   color: #ddd;
 }
 
+code {
+  background-color: lightblue;
+  color: black;
+  padding: 0.1em 0.2em;
+  text-decoration: bold;
+}
+
+pre {
+  background-color: #272822;
+  line-height: 1.4;
+  overflow-x: auto;
+  padding: 1em;
+}
+
 .toc {
   background-color: #272822;
   color: white;
 }
 
+/* Links */
 a {
   border-bottom: 3px solid var(--darkMaincolor);
   color: inherit;
 }
+
 a:hover {
   background-color: var(--darkMaincolor);
   color: black;
@@ -60,6 +67,7 @@ a:hover {
 .site-description a {
   color: #ddd;
 }
+
 .site-description a:hover {
   color: black;
 }
@@ -67,6 +75,7 @@ a:hover {
 .tags a {
   border-bottom: 3px solid var(--darkMaincolor);
 }
+
 .tags a:hover {
   background-color: var(--darkMaincolor);
   color: black;
@@ -77,6 +86,7 @@ a:hover {
   text-decoration: none !important;
 }
 
+/* Misc UI */
 .header nav,
 .footer {
   border-color: #333;
@@ -85,56 +95,67 @@ a:hover {
 .highlight {
   background-color: #333;
 }
+
 .soc:hover {
   color: black;
 }
+
 .draft-label {
-  color: var(--darkMaincolor);
   background-color: blue;
+  color: var(--darkMaincolor);
 }
-.highlight pre code[class=language-javaScript]::before,
+
+/* Code language labels */
+.highlight pre code[class="language-javaScript"]::before,
 .highlight pre code[class="language-js"]::before {
-  content: "js";
   background: #f7df1e;
   color: black;
+  content: "js";
 }
-.highlight pre code[class*='language-yml']::before,
-.highlight pre code[class*='language-yaml']::before {
-  content: 'yaml';
+
+.highlight pre code[class*="language-yml"]::before,
+.highlight pre code[class*="language-yaml"]::before {
   background: #f71e6a;
   color: white;
+  content: "yaml";
 }
-.highlight pre code[class*='language-shell']::before,
-.highlight pre code[class*='language-bash']::before,
-.highlight pre code[class*='language-sh']::before {
-  content: 'shell';
+
+.highlight pre code[class*="language-shell"]::before,
+.highlight pre code[class*="language-bash"]::before,
+.highlight pre code[class*="language-sh"]::before {
   background: green;
-  color:white
+  color: white;
+  content: "shell";
 }
-.highlight pre code[class*='language-json']::before{
-  content: 'json';
+
+.highlight pre code[class*="language-json"]::before {
   background: dodgerblue;
-   color: #000000 
+  color: #000;
+  content: "json";
 }
-.highlight pre code[class*='language-python']::before,
-.highlight pre code[class*='language-py']::before {
-  content: 'py';
+
+.highlight pre code[class*="language-python"]::before,
+.highlight pre code[class*="language-py"]::before {
   background: blue;
-  color: yellow ;
+  color: yellow;
+  content: "py";
 }
-.highlight pre code[class*='language-css']::before{
-  content: 'css';
+
+.highlight pre code[class*="language-css"]::before {
   background: cyan;
-  color: black ;
+  color: black;
+  content: "css";
 }
-.highlight pre code[class*='language-go']::before{
-  content: 'Go';
+
+.highlight pre code[class*="language-go"]::before {
   background: cyan;
-  color: royalblue ;
+  color: royalblue;
+  content: "Go";
 }
-.highlight pre code[class*='language-md']::before,
-.highlight pre code[class*='language-md']::before{
-  content: 'Markdown';
+
+.highlight pre code[class*="language-md"]::before,
+.highlight pre code[class*="language-md"]::before {
   background: royalblue;
-  color: whitesmoke ;
+  color: whitesmoke;
+  content: "Markdown";
 }
