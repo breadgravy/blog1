@@ -29,8 +29,17 @@ main() {
     if ! command -v npm >/dev/null 2>&1; then
       log "npm not found; skipping optional theme dependency install"
     else
-      log "Installing theme dependencies with npm ci"
-      npm --prefix themes/archie ci
+      if [[ -f "themes/archie/package-lock.json" ]]; then
+        log "Installing theme dependencies with npm ci"
+        if ! npm --prefix themes/archie ci; then
+          log "npm ci failed; continuing because theme dependencies are optional"
+        fi
+      else
+        log "No package-lock.json found; installing theme dependencies with npm install"
+        if ! npm --prefix themes/archie install; then
+          log "npm install failed; continuing because theme dependencies are optional"
+        fi
+      fi
     fi
   fi
 
