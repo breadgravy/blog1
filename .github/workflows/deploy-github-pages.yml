@@ -36,10 +36,6 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
-        with:
-          # Automatically enable GitHub Pages for repositories where it has
-          # not been turned on yet, avoiding 404 "Get Pages site failed".
-          enablement: true
 
       - name: Build with Hugo
         env:
