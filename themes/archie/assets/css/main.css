@@ -198,6 +198,7 @@ footer {
   align-items: center;
   border-top: 0.1rem solid var(--bordercl);
   display: flex;
+  margin-top: 1.5rem;
   padding: 0.2rem 0;
   word-spacing: 0.05em;
 }
