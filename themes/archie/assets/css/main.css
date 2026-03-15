@@ -149,14 +149,8 @@ pre code {
   width: 100%;
   padding: 0 clamp(1ch, 3vw, 3ch);
   word-wrap: break-word;
-  animation: page-content-enter 0.1s ease-out both;
 }
 
-
-.posts-section,
-.posts {
-  animation: page-content-enter 0.1s ease-out both;
-}
 
 header {
   display: flex;
@@ -272,23 +266,4 @@ article .title {
 .site-title {
   display: inline-block;
   position: relative;
-}
-
-
-@media (prefers-reduced-motion: reduce) {
-  .content {
-    animation: none;
-  }
-}
-
-@keyframes page-content-enter {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
