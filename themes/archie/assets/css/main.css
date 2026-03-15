@@ -260,3 +260,43 @@ article .title {
   font-family: monospace;
   margin: 0;
 }
+
+.site-title {
+  display: inline-block;
+  position: relative;
+}
+
+.shimmer-on-load {
+  animation: title-shimmer 1.8s ease-out 0.2s 1 both;
+  background-image: linear-gradient(
+    120deg,
+    currentColor 0%,
+    currentColor 40%,
+    rgba(255, 255, 255, 0.9) 50%,
+    currentColor 60%,
+    currentColor 100%
+  );
+  background-size: 220% 100%;
+  color: inherit;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer-on-load {
+    animation: none;
+    background-image: none;
+    -webkit-text-fill-color: initial;
+  }
+}
+
+@keyframes title-shimmer {
+  0% {
+    background-position: 120% 0;
+  }
+
+  100% {
+    background-position: -120% 0;
+  }
+}
