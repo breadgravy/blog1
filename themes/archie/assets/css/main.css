@@ -71,6 +71,38 @@ a:hover {
   color: inherit;
 }
 
+.link-click-blink {
+  animation: old-school-link-blink 0.18s steps(1, end) 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link-click-blink {
+    animation: none;
+  }
+}
+
+@keyframes old-school-link-blink {
+  0%,
+  24% {
+    background-color: var(--hlcolor);
+  }
+
+  25%,
+  49% {
+    background-color: transparent;
+  }
+
+  50%,
+  74% {
+    background-color: var(--hlcolor);
+  }
+
+  75%,
+  100% {
+    background-color: transparent;
+  }
+}
+
 ul {
   list-style: none;
   padding-left: 5ch;
