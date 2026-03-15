@@ -1,13 +1,13 @@
 # Local Blog Deployment
 
-This repository includes a single setup script to install optional theme dependencies, build the blog, and run a local Hugo server.
+This repository includes a setup script to install optional theme dependencies, build the blog, and run a local Hugo server.
 
 ## Prerequisites
 
 - [Hugo](https://gohugo.io/installation/) (required)
 - [Node.js + npm](https://nodejs.org/) (optional, used for theme dependencies)
 
-## One-command setup and deploy
+## One-command local setup
 
 From the repository root:
 
@@ -43,3 +43,37 @@ Open your browser at:
 - `http://localhost:8080` (or your custom `BASE_URL`)
 
 Press `Ctrl+C` to stop the server.
+
+---
+
+# Deploying to GitHub Pages
+
+This repository now includes a GitHub Actions workflow at `.github/workflows/deploy-github-pages.yml` that builds and deploys the Hugo output to GitHub Pages.
+
+## 1) Configure repository settings
+
+In GitHub, open **Settings → Pages** and set:
+
+- **Source**: `GitHub Actions`
+
+## 2) Push to `main`
+
+Any push to `main` triggers the workflow:
+
+1. Installs Hugo Extended.
+2. Builds the site with a Pages-aware base URL.
+3. Uploads `public/` as the Pages artifact.
+4. Deploys to the `github-pages` environment.
+
+You can also run it manually from **Actions → Deploy Hugo site to GitHub Pages → Run workflow**.
+
+## 3) Verify deployment URL
+
+After the first successful run, your site is available at:
+
+- User/Org site repo (`<owner>.github.io`): `https://<owner>.github.io/`
+- Project site repo: `https://<owner>.github.io/<repo>/`
+
+## Optional: custom domain
+
+If you want to serve the site from a custom domain, add a `static/CNAME` file containing your domain and configure DNS as documented by GitHub Pages.

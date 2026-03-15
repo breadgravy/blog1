@@ -7,5 +7,8 @@ Personal Hugo blog source.
 - `static/` — static assets copied as-is.
 - `themes/archie/` — active Hugo theme.
 - `hugo.toml` — site configuration.
+- `.github/workflows/deploy-github-pages.yml` — GitHub Pages deployment workflow.
 
-For local setup and deployment steps, see [`DEPLOYMENT.md`](DEPLOYMENT.md).
+## Deployment
+- Local setup and development: [`DEPLOYMENT.md`](DEPLOYMENT.md)
+- GitHub Pages deployment steps: [`DEPLOYMENT.md`](DEPLOYMENT.md#deploying-to-github-pages)
