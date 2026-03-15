@@ -152,6 +152,12 @@ pre code {
   animation: page-content-enter 0.5s ease-out both;
 }
 
+
+.posts-section,
+.posts {
+  animation: page-content-enter 0.5s ease-out both;
+}
+
 header {
   display: flex;
   flex-wrap: wrap;
