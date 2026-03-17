@@ -275,12 +275,21 @@ footer a::before {
   margin-bottom: 0;
 }
 
+article .title h1 {
+  font-size: 1.8rem;
+}
+
 time {
   color: grey;
 }
 
 article .title {
   margin-bottom: 1em;
+}
+
+article .body {
+  font-size: 1.1rem;
+  line-height: 1.7;
 }
 
 /* Callout */
