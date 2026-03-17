@@ -272,11 +272,17 @@ footer a::before {
 
 /* Content metadata */
 .title h1 {
+  font-size: 2rem;
   margin-bottom: 0;
 }
 
 article .title h1 {
-  font-size: 1.8rem;
+  font-size: 2rem;
+}
+
+h1.title,
+.page-title {
+  font-size: 2rem;
 }
 
 time {
@@ -306,5 +312,6 @@ article .body {
 
 .site-title {
   display: inline-block;
+  font-size: 2.5rem;
   position: relative;
 }
