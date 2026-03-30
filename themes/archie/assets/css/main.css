@@ -8,6 +8,11 @@
   --hlcolor: #e6d5ff;
 }
 
+/* Glove cursor */
+*, *::before, *::after {
+  cursor: url('/images/glove-cursor.svg') 13 2, auto;
+}
+
 /* Base */
 html {
   color: #232333;
