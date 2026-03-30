@@ -1,10 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-  <!-- Hand/glove with all 4 fingers pointing upward -->
-  <!-- Outline: index(x4-9), middle(x10-15), ring(x16-21), pinky(x22-26), palm(x4-26,y18-30) -->
-  <path d="M4,1 H9 V17 H10 V4 H15 V17 H16 V7 H21 V17 H22 V10 H26 V30 H4 Z"
-        fill="white" stroke="#555" stroke-width="1.5" stroke-linejoin="miter" stroke-linecap="square"/>
-  <!-- Seam lines on palm -->
-  <line x1="10" y1="19" x2="10" y2="27" stroke="#555" stroke-width="1" stroke-linecap="square"/>
-  <line x1="16" y1="19" x2="16" y2="27" stroke="#555" stroke-width="1" stroke-linecap="square"/>
-  <line x1="22" y1="19" x2="22" y2="27" stroke="#555" stroke-width="1" stroke-linecap="square"/>
+  <!-- Glove: index finger extended up, others curled as knuckle bumps, thumb on left -->
+  <path d="M3,4
+    Q5.5,1 8,4
+    V17 Q9,17.5 10,17
+    V13 Q12,10 14,13
+    V17 Q15,17.5 16,17
+    V14 Q18,11 20,14
+    V17 Q21,17.5 22,17
+    V16 Q23.5,13 25,16
+    V28 Q25,30 23,30
+    H5 Q3,30 3,28
+    V22 Q1.5,21 1,20 Q1.5,19 3,18
+    V4 Z"
+    fill="white" stroke="black" stroke-width="1.5"
+    stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- Seam lines between fingers, running down the palm -->
+  <line x1="9"  y1="18" x2="9"  y2="26" stroke="black" stroke-width="1" stroke-linecap="round"/>
+  <line x1="15" y1="18" x2="15" y2="26" stroke="black" stroke-width="1" stroke-linecap="round"/>
+  <line x1="21" y1="18" x2="21" y2="26" stroke="black" stroke-width="1" stroke-linecap="round"/>
 </svg>
