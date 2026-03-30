@@ -10,7 +10,7 @@
 
 /* Glove cursor */
 *, *::before, *::after {
-  cursor: url('/images/glove-cursor.svg') 13 2, auto;
+  cursor: url('/images/glove-cursor.svg') 6 1, auto;
 }
 
 /* Base */

@@ -1,9 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-  <!-- Pointing finger glove cursor -->
-  <!-- Index finger pointing up -->
-  <path d="M13 2 C13 2 11 2 11 5 L11 15 C9.5 14.2 8 14.5 7.5 15.5 C7 16.5 7.5 17.5 9 18.5 L9 19 C7.5 18.2 6 18.5 5.5 19.5 C5 20.5 5.5 21.5 7 22.5 L7 23 C5.5 22.2 4 22.5 3.5 23.5 C3 24.5 3.5 25.8 5 26.5 L7 27.5 C8.5 28.5 9 29 11 29.5 L18 29.5 C21 29.5 23 27.5 23 24.5 L23 17 C23 15.5 22 14.5 20.5 14.5 C20 14.5 19.5 14.7 19 15 L19 10 C19 8.5 18 7.5 16.5 7.5 C16 7.5 15.5 7.7 15 8 L15 5 C15 3 14 2 13 2 Z" fill="white" stroke="black" stroke-width="1.5" stroke-linejoin="round"/>
-  <!-- Glove seam lines on the back of hand -->
-  <line x1="13.5" y1="18" x2="13.5" y2="24" stroke="black" stroke-width="1.2" stroke-linecap="round"/>
-  <line x1="16" y1="18" x2="16" y2="24" stroke="black" stroke-width="1.2" stroke-linecap="round"/>
-  <line x1="18.5" y1="18" x2="18.5" y2="24" stroke="black" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- Hand/glove with all 4 fingers pointing upward -->
+  <!-- Outline: index(x4-9), middle(x10-15), ring(x16-21), pinky(x22-26), palm(x4-26,y18-30) -->
+  <path d="M4,1 H9 V17 H10 V4 H15 V17 H16 V7 H21 V17 H22 V10 H26 V30 H4 Z"
+        fill="white" stroke="#555" stroke-width="1.5" stroke-linejoin="miter" stroke-linecap="square"/>
+  <!-- Seam lines on palm -->
+  <line x1="10" y1="19" x2="10" y2="27" stroke="#555" stroke-width="1" stroke-linecap="square"/>
+  <line x1="16" y1="19" x2="16" y2="27" stroke="#555" stroke-width="1" stroke-linecap="square"/>
+  <line x1="22" y1="19" x2="22" y2="27" stroke="#555" stroke-width="1" stroke-linecap="square"/>
 </svg>
