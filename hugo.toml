@@ -4,7 +4,6 @@ title = "Brett Grady's Technical Blog"
 
 [params] 
   subtitle = "One day I'll clean this up :)"
-  mode = "toggle"
 
 [markup]
   [markup.highlight]
