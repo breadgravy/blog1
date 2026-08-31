@@ -10,11 +10,9 @@
   --muted: #a09aae;
 
   --maincolor: #a695bd;
-  --bordercl: #7d6b99;
   --hovercolor: #a695bd;
   --hlcolor: #473a5c;
   --callout-color: #332b42;
-  --darkMaincolor: #a695bd;
 
   --accent-bg: var(--hovercolor);
   --accent-fg: #191320;
@@ -56,11 +54,6 @@ h6 {
 .draft-label {
   background-color: var(--rule);
   color: #191320;
-}
-
-.site-title a,
-.site-description a {
-  color: var(--ink);
 }
 
 /* Syntax highlighting (chroma: github-dark) */
