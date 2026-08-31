@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 900" width="420" height="900" role="img" aria-label="Placeholder image, 420 by 900">
+  <defs>
+    <pattern id="dots-tall" width="16" height="16" patternUnits="userSpaceOnUse">
+      <circle cx="4" cy="4" r="2" fill="#b6acc6"/>
+      <circle cx="12" cy="12" r="2" fill="#b6acc6"/>
+    </pattern>
+  </defs>
+  <rect width="420" height="900" fill="#f2f2f5"/>
+  <rect width="420" height="900" fill="url(#dots-tall)"/>
+  <rect x="8" y="8" width="404" height="884" fill="none" stroke="#513c6b" stroke-width="4"/>
+  <path d="M8 8 412 892 M412 8 8 892" stroke="#513c6b" stroke-width="2" opacity="0.35"/>
+  <rect x="70" y="406" width="280" height="88" fill="#fafafc" stroke="#513c6b" stroke-width="4"/>
+  <text x="210" y="462" text-anchor="middle" font-family="monospace" font-size="30" fill="#232333">420 &#215; 900</text>
+</svg>
