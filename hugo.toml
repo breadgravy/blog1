@@ -1,11 +1,14 @@
 baseURL = 'http://brettg.cc'
 languageCode = 'en-us'
 title = "Brett Grady's Technical Blog"
-theme = 'archie'
 
-[params] 
+[params]
   subtitle = "One day I'll clean this up :)"
-  mode = "toggle"
+
+# Only tags; the default taxonomy set also adds categories, which this site
+# does not use and which only produced an empty /categories/ page and feed.
+[taxonomies]
+  tag = "tags"
 
 [markup]
   [markup.highlight]

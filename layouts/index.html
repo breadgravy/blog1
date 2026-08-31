@@ -1,0 +1,30 @@
+{{ define "main" }}
+<main class="list">
+	{{ with .Site.Params.subtitle }}
+	<div class="site-description"><p>{{ . }}</p></div>
+	{{ end }}
+	<div class="posts-section">
+		{{ $posts := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+		{{ $paginator := .Paginate (where $posts "Params.hidden" "ne" true) }}
+		{{ range $paginator.Pages }}
+		<section class="list-item">
+			<h1 class="title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
+			<time>{{ dateFormat ":date_medium" .Date }}{{ if .Draft }} <span class="draft-label">DRAFT</span>{{ end }}</time>
+			<br>
+			<div class="description">{{ with .Description }}{{ . }}{{ else }}{{ .Summary }}&hellip;{{ end }}</div>
+		</section>
+		{{ end }}
+
+		{{ if gt $paginator.TotalPages 1 }}
+		<ul class="pagination">
+			<span class="page-item page-prev">
+				{{ with $paginator.Prev }}<a href="{{ .URL }}" class="page-link" aria-label="Previous">← Prev</a>{{ end }}
+			</span>
+			<span class="page-item page-next">
+				{{ with $paginator.Next }}<a href="{{ .URL }}" class="page-link" aria-label="Next">Next →</a>{{ end }}
+			</span>
+		</ul>
+		{{ end }}
+	</div>
+</main>
+{{ end }}

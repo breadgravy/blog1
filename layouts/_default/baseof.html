@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	{{- if .IsHome }}
+	<title>{{ .Site.Title }} | Home</title>
+	{{- else }}
+	<title>{{ .Title }} - {{ .Site.Title }}</title>
+	{{- end }}
+
+	{{ with or .Description .Summary .Site.Params.description -}}
+	<meta name="description" content="{{ . }}" />
+	{{ end -}}
+
+	{{ with .OutputFormats.Get "rss" -}}
+	{{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+	{{ end -}}
+
+	{{- template "_internal/opengraph.html" . -}}
+	{{- template "_internal/twitter_cards.html" . -}}
+
+	{{ $main := resources.Get "css/main.css" | fingerprint -}}
+	<link rel="stylesheet" type="text/css" href="{{ $main.Permalink }}" />
+	{{ $dark := resources.Get "css/dark.css" | fingerprint -}}
+	<link rel="stylesheet" type="text/css" href="{{ $dark.Permalink }}" media="(prefers-color-scheme: dark)" />
+</head>
+<body>
+	<div class="content">
+		<header>
+			<div class="full-width-banner">
+				<img src="{{ "images/hero.avif" | relURL }}" alt="">
+			</div>
+			<div class="main">
+				<a class="site-title" href="https://breadgravy.github.io/blog1/">{{ .Site.Title }}</a>
+			</div>
+		</header>
+
+		{{- block "main" . }}{{- end }}
+
+		<footer>
+			<p>Circa {{ dateFormat "2006" now }}</p>
+		</footer>
+	</div>
+	<script src="{{ "js/main.js" | relURL }}"></script>
+</body>
+</html>

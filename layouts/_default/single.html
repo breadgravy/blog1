@@ -1,0 +1,35 @@
+{{ define "main" }}
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
+			<div class="meta">Posted on {{ dateFormat ":date_medium" .Date }}{{ if .Draft }} <span class="draft-label">DRAFT</span>{{ end }}</div>
+		</div>
+
+		{{ with .Params.tldr }}
+		<div class="tldr"><strong>tl;dr:</strong> {{ . }}</div>
+		{{ end }}
+
+		{{ if .Params.toc }}
+		<div class="toc">
+			<strong>Table of contents:</strong>
+			{{ .TableOfContents }}
+		</div>
+		{{ end }}
+
+		<section class="body">
+			{{ .Content }}
+		</section>
+
+		{{ with .GetTerms "tags" }}
+		<nav class="nav tags">
+			<ul class="tags">
+				{{ range . }}
+				<li><a href="{{ .RelPermalink }}">{{ .Data.Term }}</a></li>
+				{{ end }}
+			</ul>
+		</nav>
+		{{ end }}
+	</article>
+</main>
+{{ end }}
