@@ -5,6 +5,11 @@ title = "Brett Grady's Technical Blog"
 [params]
   subtitle = "One day I'll clean this up :)"
 
+# Only tags; the default taxonomy set also adds categories, which this site
+# does not use and which only produced an empty /categories/ page and feed.
+[taxonomies]
+  tag = "tags"
+
 [markup]
   [markup.highlight]
     noClasses = false

@@ -21,11 +21,11 @@
 			{{ .Content }}
 		</section>
 
-		{{ with .Params.tags }}
+		{{ with .GetTerms "tags" }}
 		<nav class="nav tags">
 			<ul class="tags">
 				{{ range . }}
-				<li><a href="{{ (printf "/tags/%s" (. | urlize)) | relLangURL }}">{{ . }}</a></li>
+				<li><a href="{{ .RelPermalink }}">{{ .Data.Term }}</a></li>
 				{{ end }}
 			</ul>
 		</nav>

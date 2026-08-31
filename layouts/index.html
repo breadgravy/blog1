@@ -4,8 +4,8 @@
 	<div class="site-description"><p>{{ . }}</p></div>
 	{{ end }}
 	<div class="posts-section">
-		{{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
-		{{ $paginator := .Paginate (where $pages "Params.hidden" "ne" true) }}
+		{{ $posts := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+		{{ $paginator := .Paginate (where $posts "Params.hidden" "ne" true) }}
 		{{ range $paginator.Pages }}
 		<section class="list-item">
 			<h1 class="title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
@@ -14,7 +14,17 @@
 			<div class="description">{{ with .Description }}{{ . }}{{ else }}{{ .Summary }}&hellip;{{ end }}</div>
 		</section>
 		{{ end }}
-		{{ partial "paginator.html" . }}
+
+		{{ if gt $paginator.TotalPages 1 }}
+		<ul class="pagination">
+			<span class="page-item page-prev">
+				{{ with $paginator.Prev }}<a href="{{ .URL }}" class="page-link" aria-label="Previous">← Prev</a>{{ end }}
+			</span>
+			<span class="page-item page-next">
+				{{ with $paginator.Next }}<a href="{{ .URL }}" class="page-link" aria-label="Next">Next →</a>{{ end }}
+			</span>
+		</ul>
+		{{ end }}
 	</div>
 </main>
 {{ end }}
