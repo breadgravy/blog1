@@ -1,0 +1,7 @@
+{{- /* Wrap every code block in a System-7 style window with a striped titlebar. */ -}}
+{{- $lang := or .Type "text" -}}
+{{- $title := or (.Attributes.title) $lang -}}
+<div class="code-window">
+	<div class="titlebar"><span class="window-title">{{ $title }}</span></div>
+	{{ transform.Highlight (strings.TrimRight "\n" .Inner) $lang .Options }}
+</div>
