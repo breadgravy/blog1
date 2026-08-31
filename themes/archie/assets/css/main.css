@@ -1,40 +1,76 @@
 /* Theme variables */
 :root {
-  --maincolor: #5e115c;
-  --bordercl: rebeccapurple;
-  --callout-color: dodgerblue;
-  --hovercolor: #cfa2fd;
-  --darkMaincolor: #50fa7b;
-  --hlcolor: #e6d5ff;
+  /* Palette: stark black-on-paper, sitting on a dithered "desktop". */
+  --desktop: #d6d6d6;
+  --paper: #fffef5;
+  --paper-inner: #ffffff;
+  --paper-sunken: #f7f7f7;
+  --ink: #151515;
+  --rule: #000000;
+  --soft-rule: #b8b8b8;
+  --muted: #565656;
+  --invert-bg: #000000;
+  --invert-fg: #ffffff;
+  --hlcolor: #fefd32;
+
+  /* Legacy accents kept so older markup keeps a colour. */
+  --maincolor: #151515;
+  --bordercl: #000000;
+  --callout-color: #151de0;
+  --hovercolor: #000000;
+  --darkMaincolor: #00fbad;
+
+  /* Pixel-grid spacing: everything is a multiple of 2px. */
+  --spx: 2px;
+  --panel-border: 2px solid var(--rule);
+  --panel-shadow: 6px 6px 0 var(--rule);
+  --inset-shadow: 2px 2px 0 var(--rule);
+  --panel-pad: clamp(16px, 4vw, 32px);
+  --column: 64.75rem;
+  --measure: 56.875rem;
+
+  /* 4x4 ordered-dither tile, one lit pixel in sixteen. */
+  --dither: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='4'><rect width='4' height='4' fill='white'/><rect width='1' height='1' fill='black'/></svg>");
+  --dither-tile: 4px;
+
+  --font-mono: 'Roboto Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular,
+    'SF Mono', Menlo, Monaco, Consolas, 'DejaVu Sans Mono', 'Liberation Mono',
+    'Courier New', monospace;
 }
 
 /* Base */
 html {
-  color: #232333;
-  font-family: sans-serif;
+  background-color: var(--desktop);
+  background-image: var(--dither);
+  background-size: var(--dither-tile) var(--dither-tile);
+  color: var(--ink);
+  font-family: var(--font-mono);
   font-size: 15px;
-  line-height: 1.3em;
+  line-height: 1.7;
 }
 
 body {
   display: block;
-  margin: 8px;
-  background-color: #f5f5f4;
+  margin: 0;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-mono);
 }
 
 * {
+  box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 ::selection {
-  background: var(--hlcolor);
-  color: inherit;
+  background: var(--invert-bg);
+  color: var(--invert-fg);
 }
 
 /* Typography */
 p {
-  font-family: sans-serif;
-  line-height: 1.5;
+  font-family: var(--font-mono);
+  line-height: 1.7;
 }
 
 h1,
@@ -43,33 +79,46 @@ h3,
 h4,
 h5,
 h6 {
+  font-family: var(--font-mono);
   font-size: 1.3rem;
-  font-weight: 550;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
   margin-top: 2em;
 }
 
 hr {
   border: 0;
-  border-top: 3px dotted var(--bordercl);
-  margin: 1em 0;
+  border-top: 2px solid var(--rule);
+  margin: 2.25rem 0;
 }
 
 blockquote {
-  border-left: 3px solid var(--bordercl);
-  color: #737373;
-  margin: 0;
-  padding-left: 1em;
+  background: var(--paper-sunken);
+  border-left: 6px solid var(--rule);
+  color: var(--muted);
+  font-style: italic;
+  margin: 0 0 1.25rem;
+  padding: 0.75rem 1rem;
+}
+
+blockquote > :last-child {
+  margin-bottom: 0;
 }
 
 a {
-  border-bottom: 0.1em solid var(--maincolor);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
   color: inherit;
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
 }
 
 a:hover {
-  background-color: var(--hovercolor);
-  color: inherit;
+  background-color: var(--invert-bg);
+  color: var(--invert-fg);
+  text-decoration-color: var(--invert-fg);
 }
 
 .link-click-blink {
@@ -104,6 +153,11 @@ a:hover {
   }
 }
 
+mark {
+  background-color: var(--hlcolor);
+  color: var(--ink);
+}
+
 ul {
   list-style: none;
   padding-left: 5ch;
@@ -120,7 +174,7 @@ ul > li::before {
 
 /* Media */
 img {
-  border: 2px solid #4c4c4c;
+  border: 2px solid var(--rule);
   max-width: 100%;
 }
 
@@ -150,47 +204,125 @@ figure h4::before {
   }
 }
 
-/* Code blocks */
+/* Code: inline chips and framed "code windows" */
 code {
-  background-color: #f1f1f1;
-  padding: 0.1em 0.2em;
+  background-color: var(--paper-inner);
+  outline: 2px dotted var(--rule);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  margin: 0 0.12em;
+  padding: 0.1em 0.25em;
+}
+
+/* Code windows: a framed panel with a striped System-7 titlebar. The frame
+   lives on the wrapper so the titlebar cannot scroll away with the code. */
+.code-window,
+.toc {
+  background: var(--paper-inner);
+  border: var(--panel-border);
+  box-shadow: var(--inset-shadow);
+  margin: 1.75rem 0;
+  min-width: 0;
+}
+
+.titlebar {
+  background: var(--paper);
+  border-bottom: 2px solid var(--rule);
+  height: 26px;
+  padding: 0 8px;
+  position: relative;
+}
+
+/* Horizontal pinstripes, interrupted by the title. */
+.titlebar::before {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--rule) 0 2px,
+    transparent 2px 4px
+  );
+  content: "";
+  inset: 6px 8px;
+  position: absolute;
+}
+
+.window-title {
+  background: var(--paper);
+  color: var(--ink);
+  display: inline-block;
+  font-size: 0.75rem;
+  left: 50%;
+  line-height: 1;
+  padding: 0 8px;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+.code-window .highlight {
+  background: transparent;
+  margin: 0;
 }
 
 pre {
-  background-color: #ececec;
+  background-color: var(--paper-inner);
+  font-family: var(--font-mono);
   line-height: 1.4;
+  margin: 0;
   overflow-x: auto;
-  padding: 1em;
+  padding: 0.75em 1em;
 }
 
 .highlight pre ::selection {
-  background: rgba(255, 255, 255, 0.2);
-  color: inherit;
+  background: var(--invert-bg);
+  color: var(--invert-fg);
 }
 
 pre code {
   background-color: transparent;
   color: inherit;
   font-size: 100%;
+  outline: 0;
+  margin: 0;
   padding: 0;
 }
 
-/* Layout */
+/* Any stray <pre> outside a code window still gets the frame. */
+.body > pre,
+.body > .highlight {
+  border: var(--panel-border);
+  box-shadow: var(--inset-shadow);
+  margin: 1.75rem 0;
+}
+
+/* Layout: the page is a stack of paper panels on the dithered desktop. */
 .content {
-  margin: 0 auto 4em;
-  max-width: 120ch;
+  margin: 0 auto;
+  max-width: var(--column);
+  padding: 16px 20px 24px;
   width: 100%;
-  padding: 0 clamp(1ch, 3vw, 3ch);
   word-wrap: break-word;
 }
 
+header,
+main,
+footer {
+  background: var(--paper);
+  border: var(--panel-border);
+  box-shadow: var(--panel-shadow);
+}
 
 header {
+  align-items: center;
+  column-gap: 24px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   line-height: 1.8em;
-  margin: 0;
+  margin: 0 0 24px;
+  padding: var(--panel-pad);
 }
 
 header .main {
@@ -198,58 +330,58 @@ header .main {
 }
 
 main {
-  padding: 0;
+  padding: var(--panel-pad);
 }
 
+/* Full-bleed inside the header panel, flush against its border. */
 .full-width-banner {
-  margin: 0;
+  flex: 0 0 auto;
+  margin: calc(-1 * var(--panel-pad)) calc(-1 * var(--panel-pad)) var(--panel-pad);
+  max-width: none;
+  width: calc(100% + 2 * var(--panel-pad));
+  overflow: hidden;
   padding: 0;
   position: relative;
-  width: 100vw;
 }
 
 .full-width-banner img {
+  border: 0;
+  border-bottom: 2px solid var(--rule);
+  display: block;
   height: 40px;
   object-fit: cover;
   width: 100%;
 }
 
 .meta {
-  color: #999;
-  letter-spacing: -0.5px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  letter-spacing: 0;
 }
 
 .toc {
-  background-color: #ececec;
-  border-radius: 5px;
-  color: #232333;
+  color: var(--ink);
   display: inline-block;
-  padding: 10px 10px 0;
+  padding: 10px 16px;
 }
 
 /* Footer */
 footer {
   align-items: center;
-  border-top: 0.1rem solid var(--bordercl);
   display: flex;
-  margin-top: 1.5rem;
-  padding: 0.2rem 0;
+  margin-top: 24px;
+  padding: 12px 16px;
   word-spacing: 0.05em;
 }
 
 footer p {
-  color: #777887;
+  color: var(--muted);
   font-size: 12px;
   line-height: 1;
 }
 
 footer a {
-  border-bottom: 0.1em solid dodgerblue;
   font-style: bold;
-}
-
-footer a:hover {
-  background-color: #ddddff;
 }
 
 footer a::before {
@@ -258,8 +390,8 @@ footer a::before {
 
 .soc {
   align-items: center;
-  border-bottom: none;
   display: flex;
+  text-decoration: none;
 }
 
 .border {
@@ -272,10 +404,17 @@ footer a::before {
 }
 
 /* Content metadata */
+main > :first-child,
+article > :first-child,
+.body > :first-child,
+.title > :first-child {
+  margin-top: 0;
+}
+
 .title h1 {
   font-size: 2rem;
   margin-bottom: 0;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 article .title h1 {
@@ -288,7 +427,8 @@ h1.title,
 }
 
 time {
-  color: grey;
+  color: var(--muted);
+  font-size: 0.85rem;
 }
 
 article .title {
@@ -296,25 +436,153 @@ article .title {
 }
 
 article .body {
-  font-size: 1.1rem;
-  line-height: 1.7;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  max-width: var(--measure);
 }
 
 /* Callout */
 .callout {
-  background-color: var(--callout-color);
-  color: #fff;
+  background-color: var(--hlcolor);
+  border: var(--panel-border);
+  box-shadow: var(--inset-shadow);
+  color: var(--ink);
   padding: 1em;
 }
 
 .callout p {
-  font-family: monospace;
+  font-family: var(--font-mono);
   margin: 0;
 }
 
 .site-title {
   display: inline-block;
-  font-size: 2.5rem;
+  font-size: clamp(1.6rem, 5vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
   position: relative;
   padding-bottom: 9px;
+  text-decoration: none;
 }
+
+@media screen and (max-width: 600px) {
+  :root {
+    --panel-shadow: 4px 4px 0 var(--rule);
+  }
+
+  .content {
+    padding: 10px 12px 16px;
+  }
+}
+
+.list-item + .list-item {
+  border-top: 2px solid var(--soft-rule);
+  margin-top: 2rem;
+  padding-top: 2rem;
+}
+
+.posts .post {
+  margin-bottom: 0.35rem;
+}
+
+.pagination {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin-top: 2rem;
+  padding: 0;
+}
+
+.draft-label {
+  background-color: var(--invert-bg);
+  color: var(--invert-fg);
+  padding: 0 0.3em;
+}
+
+/* Syntax highlighting (chroma: tango) */
+/* Other */ .chroma .x { color:#000 }
+/* Error */ .chroma .err { color:#a40000 }
+/* CodeLine */ .chroma .cl {  }
+/* LineLink */ .chroma .lnlinks { outline:none;text-decoration:none;color:inherit }
+/* LineTableTD */ .chroma .lntd { vertical-align:top;padding:0;margin:0;border:0; }
+/* LineTable */ .chroma .lntable { border-spacing:0;padding:0;margin:0;border:0; }
+/* LineHighlight */ .chroma .hl { background-color:#dfdfdf }
+/* LineNumbersTable */ .chroma .lnt { white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f }
+/* LineNumbers */ .chroma .ln { white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f }
+/* Line */ .chroma .line { display:flex; }
+/* Keyword */ .chroma .k { color:#204a87;font-weight:bold }
+/* KeywordConstant */ .chroma .kc { color:#204a87;font-weight:bold }
+/* KeywordDeclaration */ .chroma .kd { color:#204a87;font-weight:bold }
+/* KeywordNamespace */ .chroma .kn { color:#204a87;font-weight:bold }
+/* KeywordPseudo */ .chroma .kp { color:#204a87;font-weight:bold }
+/* KeywordReserved */ .chroma .kr { color:#204a87;font-weight:bold }
+/* KeywordType */ .chroma .kt { color:#204a87;font-weight:bold }
+/* Name */ .chroma .n { color:#000 }
+/* NameAttribute */ .chroma .na { color:#c4a000 }
+/* NameClass */ .chroma .nc { color:#000 }
+/* NameConstant */ .chroma .no { color:#000 }
+/* NameDecorator */ .chroma .nd { color:#5c35cc;font-weight:bold }
+/* NameEntity */ .chroma .ni { color:#ce5c00 }
+/* NameException */ .chroma .ne { color:#c00;font-weight:bold }
+/* NameLabel */ .chroma .nl { color:#f57900 }
+/* NameNamespace */ .chroma .nn { color:#000 }
+/* NameOther */ .chroma .nx { color:#000 }
+/* NameProperty */ .chroma .py { color:#000 }
+/* NameTag */ .chroma .nt { color:#204a87;font-weight:bold }
+/* NameBuiltin */ .chroma .nb { color:#204a87 }
+/* NameBuiltinPseudo */ .chroma .bp { color:#3465a4 }
+/* NameVariable */ .chroma .nv { color:#000 }
+/* NameVariableClass */ .chroma .vc { color:#000 }
+/* NameVariableGlobal */ .chroma .vg { color:#000 }
+/* NameVariableInstance */ .chroma .vi { color:#000 }
+/* NameVariableMagic */ .chroma .vm { color:#000 }
+/* NameFunction */ .chroma .nf { color:#000 }
+/* NameFunctionMagic */ .chroma .fm { color:#000 }
+/* Literal */ .chroma .l { color:#000 }
+/* LiteralDate */ .chroma .ld { color:#000 }
+/* LiteralString */ .chroma .s { color:#4e9a06 }
+/* LiteralStringAffix */ .chroma .sa { color:#4e9a06 }
+/* LiteralStringBacktick */ .chroma .sb { color:#4e9a06 }
+/* LiteralStringChar */ .chroma .sc { color:#4e9a06 }
+/* LiteralStringDelimiter */ .chroma .dl { color:#4e9a06 }
+/* LiteralStringDoc */ .chroma .sd { color:#8f5902;font-style:italic }
+/* LiteralStringDouble */ .chroma .s2 { color:#4e9a06 }
+/* LiteralStringEscape */ .chroma .se { color:#4e9a06 }
+/* LiteralStringHeredoc */ .chroma .sh { color:#4e9a06 }
+/* LiteralStringInterpol */ .chroma .si { color:#4e9a06 }
+/* LiteralStringOther */ .chroma .sx { color:#4e9a06 }
+/* LiteralStringRegex */ .chroma .sr { color:#4e9a06 }
+/* LiteralStringSingle */ .chroma .s1 { color:#4e9a06 }
+/* LiteralStringSymbol */ .chroma .ss { color:#4e9a06 }
+/* LiteralNumber */ .chroma .m { color:#0000cf;font-weight:bold }
+/* LiteralNumberBin */ .chroma .mb { color:#0000cf;font-weight:bold }
+/* LiteralNumberFloat */ .chroma .mf { color:#0000cf;font-weight:bold }
+/* LiteralNumberHex */ .chroma .mh { color:#0000cf;font-weight:bold }
+/* LiteralNumberInteger */ .chroma .mi { color:#0000cf;font-weight:bold }
+/* LiteralNumberIntegerLong */ .chroma .il { color:#0000cf;font-weight:bold }
+/* LiteralNumberOct */ .chroma .mo { color:#0000cf;font-weight:bold }
+/* Operator */ .chroma .o { color:#ce5c00;font-weight:bold }
+/* OperatorWord */ .chroma .ow { color:#204a87;font-weight:bold }
+/* Punctuation */ .chroma .p { color:#000;font-weight:bold }
+/* Comment */ .chroma .c { color:#8f5902;font-style:italic }
+/* CommentHashbang */ .chroma .ch { color:#8f5902;font-style:italic }
+/* CommentMultiline */ .chroma .cm { color:#8f5902;font-style:italic }
+/* CommentSingle */ .chroma .c1 { color:#8f5902;font-style:italic }
+/* CommentSpecial */ .chroma .cs { color:#8f5902;font-style:italic }
+/* CommentPreproc */ .chroma .cp { color:#8f5902;font-style:italic }
+/* CommentPreprocFile */ .chroma .cpf { color:#8f5902;font-style:italic }
+/* Generic */ .chroma .g { color:#000 }
+/* GenericDeleted */ .chroma .gd { color:#a40000 }
+/* GenericEmph */ .chroma .ge { color:#000;font-style:italic }
+/* GenericError */ .chroma .gr { color:#ef2929 }
+/* GenericHeading */ .chroma .gh { color:#000080;font-weight:bold }
+/* GenericInserted */ .chroma .gi { color:#00a000 }
+/* GenericOutput */ .chroma .go { color:#000;font-style:italic }
+/* GenericPrompt */ .chroma .gp { color:#8f5902 }
+/* GenericStrong */ .chroma .gs { color:#000;font-weight:bold }
+/* GenericSubheading */ .chroma .gu { color:#800080;font-weight:bold }
+/* GenericTraceback */ .chroma .gt { color:#a40000;font-weight:bold }
+/* GenericUnderline */ .chroma .gl { color:#000;text-decoration:underline }
+/* TextWhitespace */ .chroma .w { color:#f8f8f8;text-decoration:underline }
+.chroma { background: transparent; }
