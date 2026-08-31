@@ -1,35 +1,59 @@
 {{ define "main" }}
-<main>
-	<article>
-		<div class="title">
-			<h1 class="title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
-			<div class="meta">Posted on {{ dateFormat ":date_medium" .Date }}{{ if .Draft }} <span class="draft-label">DRAFT</span>{{ end }}</div>
-		</div>
+<!-- The desktop behind the article window, dimmed the way a modal document
+     window dims the Finder behind it. Purely decorative, so clicks pass
+     through to the header and footer. -->
+<div class="desktop-dim" aria-hidden="true"></div>
 
-		{{ with .Params.tldr }}
-		<div class="tldr"><strong>tl;dr:</strong> {{ . }}</div>
-		{{ end }}
+<div class="mac-window">
+	<div class="mac-titlebar">
+		<a class="mac-close" href="{{ .Site.Home.RelPermalink }}" aria-label="Close window" title="Close"></a>
+		<span class="window-title">{{ .Title }}</span>
+		<button class="mac-zoom" type="button" aria-label="Zoom window" title="Zoom" aria-pressed="false"></button>
+	</div>
 
-		{{ if .Params.toc }}
-		<div class="toc">
-			<strong>Table of contents:</strong>
-			{{ .TableOfContents }}
-		</div>
-		{{ end }}
+	<div class="mac-window-body">
+		<main>
+			<article>
+				<div class="title">
+					<h1 class="title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
+					<div class="meta">Posted on {{ dateFormat ":date_medium" .Date }}{{ if .Draft }} <span class="draft-label">DRAFT</span>{{ end }}</div>
+				</div>
 
-		<section class="body">
-			{{ .Content }}
-		</section>
-
-		{{ with .GetTerms "tags" }}
-		<nav class="nav tags">
-			<ul class="tags">
-				{{ range . }}
-				<li><a href="{{ .RelPermalink }}">{{ .Data.Term }}</a></li>
+				{{ with .Params.tldr }}
+				<div class="tldr"><strong>tl;dr:</strong> {{ . }}</div>
 				{{ end }}
-			</ul>
-		</nav>
-		{{ end }}
-	</article>
-</main>
+
+				{{ if .Params.toc }}
+				<div class="toc">
+					<strong>Table of contents:</strong>
+					{{ .TableOfContents }}
+				</div>
+				{{ end }}
+
+				<section class="body">
+					{{ .Content }}
+				</section>
+
+				{{ with .GetTerms "tags" }}
+				<nav class="nav tags">
+					<ul class="tags">
+						{{ range . }}
+						<li><a href="{{ .RelPermalink }}">{{ .Data.Term }}</a></li>
+						{{ end }}
+					</ul>
+				</nav>
+				{{ end }}
+			</article>
+		</main>
+
+		<!-- Window furniture: a vertical scrollbar tracking page scroll, with a
+		     grow box tucked into its bottom corner. -->
+		<div class="mac-scrollbar" aria-hidden="true">
+			<span class="mac-arrow mac-arrow-up"></span>
+			<div class="mac-track"><span class="mac-thumb"></span></div>
+			<span class="mac-arrow mac-arrow-down"></span>
+			<span class="mac-grow"></span>
+		</div>
+	</div>
+</div>
 {{ end }}

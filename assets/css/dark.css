@@ -18,6 +18,8 @@
   --accent-fg: #191320;
 
   --halftone-dot: #24242e;
+
+  --dim: rgba(0, 0, 0, 0.3);
 }
 
 html {
