@@ -1,23 +1,55 @@
 # blog1
 
-Personal Hugo blog source.
+Source for [Brett Grady's Technical Blog](http://brettg.cc), a [Hugo](https://gohugo.io) site.
 
-## Repository structure
-- `content/` — blog posts and pages.
-- `static/` — static assets copied as-is.
-- `themes/archie/` — active Hugo theme.
-- `hugo.toml` — site configuration.
-- `.github/workflows/deploy-github-pages.yml` — GitHub Pages deployment workflow.
+## Layout
 
-## Deployment
-- Local setup and development: [`DEPLOYMENT.md`](DEPLOYMENT.md)
-- GitHub Pages deployment steps: [`DEPLOYMENT.md`](DEPLOYMENT.md#deploying-to-github-pages)
+    content/posts/   posts, one Markdown file each
+    layouts/         page templates
+    assets/css/      main.css (light) and dark.css (prefers-color-scheme: dark)
+    static/          files copied to the site root as-is
+    hugo.toml        site configuration
 
-## Adding new blog posts
-1. Create a new post file in `content/posts/` (for example with Hugo: `hugo new content/posts/my-post.md`).
-2. Add/update front matter at the top of the file using TOML fields like:
-   - `title = 'My Post Title'`
-   - `date = 2026-03-15`
-3. Write your post content below the front matter in Markdown.
-4. Preview locally with `./setup_local_blog.sh` (or `hugo server`) and open `http://localhost:8080`.
-5. Commit and push; publishing happens through the GitHub Pages workflow documented in `DEPLOYMENT.md`.
+The templates started as the [archie](https://github.com/athul/archie) theme
+(MIT, see `LICENSE`) and have since been rewritten in place, so they live at
+the project root rather than under `themes/`.
+
+## Running it locally
+
+Install [Hugo](https://gohugo.io/installation/) (extended), then:
+
+    hugo server
+
+The site is served at <http://localhost:1313> and reloads as you edit. Add
+`-D` to include drafts. To build into `public/` without serving, run
+`hugo --minify`.
+
+## Writing a post
+
+Create `content/posts/my-post.md` with TOML front matter:
+
+    +++
+    title = 'My Post Title'
+    date = 2026-03-15
+    tags = ['hugo']      # optional
+    tldr = 'One line.'   # optional, rendered above the post
+    toc = true           # optional, renders a table of contents
+    draft = true         # optional, hidden unless you pass -D
+    +++
+
+Then write Markdown below it. Fenced code blocks render in a framed window;
+its titlebar shows the language, or a `title` attribute if you set one:
+
+    ```go {title="main.go"}
+
+There is also a `{{< callout text="..." >}}` shortcode.
+
+## Deploying
+
+Pushing to `main` triggers `.github/workflows/deploy-github-pages.yml`, which
+builds with Hugo and publishes to GitHub Pages. It can also be run by hand
+from **Actions → Deploy Hugo site to GitHub Pages → Run workflow**.
+
+The repository must have **Settings → Pages → Source** set to **GitHub
+Actions**. To serve from a custom domain, put the domain in `static/CNAME`
+and point DNS at GitHub Pages.

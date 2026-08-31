@@ -2,7 +2,7 @@ baseURL = 'http://brettg.cc'
 languageCode = 'en-us'
 title = "Brett Grady's Technical Blog"
 
-[params] 
+[params]
   subtitle = "One day I'll clean this up :)"
 
 [markup]
